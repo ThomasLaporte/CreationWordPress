@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Formulaire d'installation WP</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    
+<h1>Installation WP</h1>
+<div class="wrap">
+<form action="traitement.php" method="post">
+    <input type="text" name="BDD_name" required placeholder="Nom de la BDD*">
+    <input type="text" name="BDD_id" required placeholder="ID*">
+    <input type="password" name="BDD_mdp" required placeholder="MDP"*>
+    <input type="text" name="BDD_host" required placeholder="BDD host / Par défaut 192.168.33.10*">
+    <input type="text" name="BDD_prefixe" required placeholder="Préfixe de table*">
+    <hr>
+    <input type="text" name="SITE_title" required placeholder="Titre du site*">
+    <input type="text" name="SITE_id" required placeholder="ID*">
+    <input type="password" id="SITE_mdp" name="SITE_mdp" required placeholder="MDP*">
+    <input type="password" id="SITE_mdp_confirm" name="SITE_mdp_confirm" required placeholder="Confirmation du MDP*" onkeyup="checkPass(); return false;">
+    <span id="confirmMessage" class="confirmMessage"></span>
+    <input type="email" name="SITE_mail" required placeholder="Mail*">
+    <span class="span">
+        <input class="checkbox" type="checkbox" name="SITE_index">
+        <label class="label">Indexation du site</label>
+    </span><br>
+    <button id="submit" type="submit" class="yes" >ENVOYER</button>
+</form>
+</div>
+    
+<script>
+    function checkPass()
+{
+    //Stock les MDP dans des variables
+    var SITE_mdp = document.getElementById('SITE_mdp');
+    var SITE_mdp_confirm = document.getElementById('SITE_mdp_confirm');
+    //Message de confirmation
+    var message = document.getElementById('confirmMessage');
+    //Stoc les couleurs dans des variables
+    var goodColor = "#66cc66";
+    var badColor = "#ff6666";
+    //Comparaison des mdp 
+    //and the confirmation field
+    if(SITE_mdp.value == SITE_mdp_confirm.value){
+        //Correspondance
+        SITE_mdp_confirm.style.backgroundColor = goodColor;
+        message.style.color = goodColor;
+        message.innerHTML = "Correspondance des MDP"
+        submit.classList.add("yes");
+        submit.classList.remove("no");
+    }else{
+        //Non correspondance
+        SITE_mdp_confirm.style.backgroundColor = badColor;
+        message.style.color = badColor;
+        message.innerHTML = "Pas de correspondance des MDP"
+        submit.classList.add("no");
+        submit.classList.remove("yes");
+    }
+}  
+</script>
+    
+</body>
+</html>
+

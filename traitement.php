@@ -23,10 +23,10 @@ $textConf = "<ifModule mod_rewrite.c>
               </ifModule>";
 
 $output= array();
-$cmd="sudo curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+$cmd='sudo curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
 chmod +x wp-cli.phar
-$ sudo mv wp-cli.phar /usr/local/bin/wp
+sudo mv wp-cli.phar /usr/local/bin/wp
 
 cd /var/www/html
 mkdir '.$SITE_title.'
@@ -41,28 +41,28 @@ wp core install --url='.$BDD_host.' --title='.$SITE_title.' --admin_user='.$SITE
 
 
 
-sudo sed -i '13i\<Directory /var/www/html/wpcli>
+sudo sed -i "13i\<Directory /var/www/html/wpcli>
               Options Indexes FollowSymlinks
               AllowOverride All
               Require all granted
-              </Directory>' '/etc/apache2/sites-available/000-default.conf'
+              </Directory>" "/etc/apache2/sites-available/000-default.conf"
 
-'<ifModule mod_rewrite.c>
+"<ifModule mod_rewrite.c>
 RewriteEngine On
-</ifModule>' >> '/etc/apache2/apache2.conf'
+</ifModule>" >> "/etc/apache2/apache2.conf"
 
-sudo service apache2 restart";
+sudo service apache2 restart';
 
 $return_var=10;
-
+echo "coucou";
 echo '1 :'.escapeshellcmd($cmd);
 echo '  <br>  2 :'.escapeshellarg($cmd);
 
-exec($cmd,$output,$return_var);
+//exec($cmd,$output,$return_var);
 
-var_dump($output);
+//var_dump($output);
 
-if ($return_var!=0) {
-  echo(' ERREUR !! ');
-}
+// if ($return_var!=0) {
+//   echo(' ERREUR !! ');
+// }
 ?>

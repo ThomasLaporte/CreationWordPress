@@ -23,46 +23,69 @@ $textConf = "<ifModule mod_rewrite.c>
               </ifModule>";
 
 $output= array();
-$cmd='sudo curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-
-chmod +x wp-cli.phar
-sudo mv wp-cli.phar /usr/local/bin/wp
-
-cd /var/www/html
-mkdir '.$SITE_title.'
-cd '.$SITE_title.'
-
-wp core download
-
-wp core config --dbname='.$BDD_name.' --dbuser='.$BDD_id.' --dbpass='.$BDD_mdp.' --locale=en_EN
-wp db create
-
-wp core install --url='.$BDD_host.' --title='.$SITE_title.' --admin_user='.$SITE_id.' --admin_password='.$SITE_mdp.' --admin_email='.$SITE_mail.' --skip-email
 
 
+$cmd='sudo curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar';
+exec($cmd,$output);
 
-sudo sed -i \'13i\<Directory /var/www/html/wpcli>
-              Options Indexes FollowSymlinks
-              AllowOverride All
-              Require all granted
-              </Directory>\' \'/etc/apache2/sites-available/000-default.conf\'
+$cmd='chmod +x wp-cli.phar';
+exec($cmd,$output);
 
-\'<ifModule mod_rewrite.c>
-RewriteEngine On
-</ifModule>\' >> \'/etc/apache2/apache2.conf\'
+$cmd='sudo mv wp-cli.phar /usr/local/bin/wp';
+exec($cmd,$output);
 
-sudo service apache2 restart';
 
-$return_var=10;
+$cmd='cd /var/www/html';
+exec($cmd,$output);
+
+$cmd='mkdir '.$SITE_title;
+exec($cmd,$output);
+
+$cmd='cd '.$SITE_title;
+exec($cmd,$output);
+
+
+$cmd='wp core download';
+exec($cmd,$output);
+
+
+$cmd='wp core config --dbname='.$BDD_name.' --dbuser='.$BDD_id.' --dbpass='.$BDD_mdp.' --locale=en_EN';
+exec($cmd,$output);
+
+$cmd='wp db create';
+exec($cmd,$output);
+
+
+$cmd='wp core install --url='.$BDD_host.' --title='.$SITE_title.' --admin_user='.$SITE_id.' --admin_password='.$SITE_mdp.' --admin_email='.$SITE_mail.' --skip-email';
+exec($cmd,$output);
+
+
+
+
+$cmd='sudo sed -i \'13i\<Directory /var/www/html/'.$SITE_title.'> Options Indexes FollowSymlinks AllowOverride All Require all granted </Directory>\' \'/etc/apache2/sites-available/000-default.conf\' ';
+exec($cmd,$output);
+
+
+$cmd='sudo su';
+exec($cmd,$output);
+
+
+$cmd='echo \'<ifModule mod_rewrite.c> RewriteEngine On </ifModule>\' >> /etc/apache2/apache2.conf';
+exec($cmd,$output);
+
+
+$cmd='sudo service apache2 restart';
+exec($cmd,$output);
+
+var_dump($output);
+
 //echo $cmd;
 //echo '1 :'.escapeshellcmd($cmd);
 //echo '  <br>  2 :'.escapeshellarg($cmd);
 
-exec($cmd,$output,$return_var);
 
-var_dump($output);
-
- if ($return_var!=0) {
-   echo(' ERREUR !! ');
- }
+//
+//  if ($return_var!=0) {
+//    echo(' ERREUR !! ');
+//  }
 ?>

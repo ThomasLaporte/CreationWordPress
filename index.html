@@ -17,7 +17,7 @@
     <input type="password" name="BDD_mdp" required placeholder="MDP"*>
     <input type="text" name="BDD_host" required placeholder="BDD host / Par défaut 192.168.33.10*">
     <input type="text" name="BDD_prefixe" required placeholder="Préfixe de table*">
-    <hr>
+    <hr><br>
     <h2>Site</h2>
     <input type="text" name="SITE_title" required placeholder="Titre du site*">
     <input type="text" name="SITE_id" required placeholder="ID*">
@@ -25,6 +25,14 @@
     <input type="password" id="SITE_mdp_confirm" name="SITE_mdp_confirm" required placeholder="Confirmation du MDP*" onkeyup="checkPass(); return false;">
     <span id="confirmMessage" class="confirmMessage"></span>
     <input type="email" name="SITE_mail" required placeholder="Mail*">
+    <hr><br>
+    <span>
+    <select name="THEME_list" class="select">
+        <option value="Activello">Activello</option>
+        <option value="Dazzling">Dazzling</option>
+        <option value="Unite">Unite</option>
+    </select>
+    </span>
     <span class="span">
         <input class="checkbox" type="checkbox" name="SITE_index">
         <label class="label">Indexation du site</label>

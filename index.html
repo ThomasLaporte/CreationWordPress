@@ -11,12 +11,14 @@
 <h1>Installation WP</h1>
 <div class="wrap">
 <form action="traitement.php" method="post">
+    <h2>BDD</h2>
     <input type="text" name="BDD_name" required placeholder="Nom de la BDD*">
     <input type="text" name="BDD_id" required placeholder="ID*">
     <input type="password" name="BDD_mdp" required placeholder="MDP"*>
     <input type="text" name="BDD_host" required placeholder="BDD host / Par défaut 192.168.33.10*">
     <input type="text" name="BDD_prefixe" required placeholder="Préfixe de table*">
     <hr>
+    <h2>Site</h2>
     <input type="text" name="SITE_title" required placeholder="Titre du site*">
     <input type="text" name="SITE_id" required placeholder="ID*">
     <input type="password" id="SITE_mdp" name="SITE_mdp" required placeholder="MDP*">
@@ -27,7 +29,7 @@
         <input class="checkbox" type="checkbox" name="SITE_index">
         <label class="label">Indexation du site</label>
     </span><br>
-    <button id="submit" type="submit" class="yes" >ENVOYER</button>
+    <button id="submit" type="submit" class="submit" >ENVOYER</button>
 </form>
 </div>
     
@@ -51,6 +53,7 @@
         message.innerHTML = "Correspondance des MDP"
         submit.classList.add("yes");
         submit.classList.remove("no");
+        submit.classList.remove("submit");
     }else{
         //Non correspondance
         SITE_mdp_confirm.style.backgroundColor = badColor;
